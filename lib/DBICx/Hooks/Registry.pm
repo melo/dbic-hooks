@@ -1,4 +1,7 @@
 package DBICx::Hooks::Registry;
+BEGIN {
+  $DBICx::Hooks::Registry::VERSION = '0.001';
+}
 
 # ABSTRACT: Provide hooks into DBIx::Class create()/update()
 
@@ -11,42 +14,6 @@ use parent 'Exporter';
 @DBICx::Hooks::Registry::EXPORT = qw( dbic_hooks_register dbic_hooks_for );
 
 
-=function dbic_hooks_register
-
-    dbic_hooks_register('Source', 'Action', sub { my $row = shift; ... });
-    dbic_hooks_register($row_obj, 'Action', sub { my $row = shift; ... });
-    dbic_hooks_register($rs_obj,  'Action', sub { my $row = shift; ... });
-
-The C<dbic_hooks_register> function takes a pair C<Source>/C<Action> and
-a callback. The callback will be called after the specified C<Action> is
-performed on C<Source>.
-
-The following C<Action>'s are supported: C<create> and C<update>.
-
-The C<create> action will be called after a new row is created on C<Source>.
-
-The C<update> action is called when the update() method is called on a
-L<DBIx::Class::Row|DBIx::Class::Row> object. Note that if all the fields
-are updated to the same values as the current ones, no C<UPDATE> SQL
-command is actually sent to the database server, but the callback will
-be called anyway.
-
-All the callbacks receive a single parameter, the
-L<DBIx::Class::Row|DBIx::Class::Row> object that was created or
-modified.
-
-
-=function dbic_hooks_for
-
-    @list_of_cbs = dbic_hooks_for('Source', 'Action');
-    @list_of_cbs = dbic_hooks_for($row_obj, 'Action');
-    @list_of_cbs = dbic_hooks_for($rs_obj,  'Action');
-
-Returns in list context a possibly empty list of callbacks for a pair
-C<Source>/C<Action>. In scalar context returns the number of elements
-in the list.
-
-=cut
 
 {
   my %registry;
@@ -99,7 +66,17 @@ in the list.
 
 1;
 
-__END__
+
+
+=pod
+
+=head1 NAME
+
+DBICx::Hooks::Registry - Provide hooks into DBIx::Class create()/update()
+
+=head1 VERSION
+
+version 0.001
 
 =head1 SYNOPSIS
 
@@ -124,4 +101,54 @@ __END__
 To register a callback with a specific Source/Action pair, you use this
 registry functions.
 
+=function dbic_hooks_register
+
+    dbic_hooks_register('Source', 'Action', sub { my $row = shift; ... });
+    dbic_hooks_register($row_obj, 'Action', sub { my $row = shift; ... });
+    dbic_hooks_register($rs_obj,  'Action', sub { my $row = shift; ... });
+
+The C<dbic_hooks_register> function takes a pair C<Source>/C<Action> and
+a callback. The callback will be called after the specified C<Action> is
+performed on C<Source>.
+
+The following C<Action>'s are supported: C<create> and C<update>.
+
+The C<create> action will be called after a new row is created on C<Source>.
+
+The C<update> action is called when the update() method is called on a
+L<DBIx::Class::Row|DBIx::Class::Row> object. Note that if all the fields
+are updated to the same values as the current ones, no C<UPDATE> SQL
+command is actually sent to the database server, but the callback will
+be called anyway.
+
+All the callbacks receive a single parameter, the
+L<DBIx::Class::Row|DBIx::Class::Row> object that was created or
+modified.
+
+=function dbic_hooks_for
+
+    @list_of_cbs = dbic_hooks_for('Source', 'Action');
+    @list_of_cbs = dbic_hooks_for($row_obj, 'Action');
+    @list_of_cbs = dbic_hooks_for($rs_obj,  'Action');
+
+Returns in list context a possibly empty list of callbacks for a pair
+C<Source>/C<Action>. In scalar context returns the number of elements
+in the list.
+
+=head1 AUTHOR
+
+Pedro Melo <melo@simplicidade.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2011 by Pedro Melo.
+
+This is free software, licensed under:
+
+  The Artistic License 2.0
+
 =cut
+
+
+__END__
+

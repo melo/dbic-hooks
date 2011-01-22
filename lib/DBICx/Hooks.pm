@@ -1,9 +1,101 @@
 package DBICx::Hooks;
-# ABSTRACT: a very cool module
+BEGIN {
+  $DBICx::Hooks::VERSION = '0.001';
+}
+
+# ABSTRACT: Provide hooks into DBIx::Class create()/update()/delete()
 
 use strict;
 use warnings;
+use DBICx::Hooks::Registry;
 
+sub insert {
+  my $self = shift;
+  my $ret  = $self->next::method(@_);
+
+  $_->($self) for dbic_hooks_for($self, 'create');
+
+  $ret;
+}
+
+
+sub update {
+  my $self = shift;
+  my $ret  = $self->next::method(@_);
+
+  $_->($self) for dbic_hooks_for($self, 'update');
+
+  $ret;
+}
+
+
+sub delete {
+  my $self = shift;
+  my $ret  = $self->next::method(@_);
+
+  $_->($self) for dbic_hooks_for($self, 'delete');
+
+  $ret;
+}
 
 
 1;
+
+
+__END__
+=pod
+
+=head1 NAME
+
+DBICx::Hooks - Provide hooks into DBIx::Class create()/update()/delete()
+
+=head1 VERSION
+
+version 0.001
+
+=head1 SYNOPSIS
+
+    ## On your DBIx::Class sources
+    package Schema::Result::SourceName;
+    use parent 'DBIx::Class::Core';
+    
+    __PACKAGE__->load_components('+DBICx::Hooks');
+    
+    
+    ## Somewhere on your code
+    use DBICx::Hooks::Registry;
+    
+    dbic_hooks_registry('Schema::Result::SourceName', 'create', sub {
+      my ($new_row) = @_;
+    
+      ## your bussiness logic goes here
+    });
+    
+    dbic_hooks_registry('Schema::Result::SourceName', 'update', sub {
+      my ($updated_row) = @_;
+    
+      ## your bussiness logic goes here
+    });
+
+=head1 DESCRIPTION
+
+This modules provides a way to hook into the create(), update(), and
+delete() calls on your sources.
+
+This can be used to trigger bussiness processes after one of this
+operations.
+
+=head1 AUTHOR
+
+Pedro Melo <melo@simplicidade.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2011 by Pedro Melo.
+
+This is free software, licensed under:
+
+  The Artistic License 2.0
+
+=cut
+
