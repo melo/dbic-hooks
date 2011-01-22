@@ -80,15 +80,17 @@ version 0.001
 
 =head1 SYNOPSIS
 
+    use DBICx::Hooks::Registry;
+    
     dbic_hooks_register('My::Schema::Result::MySource', 'create', sub {
       my ($row) = @_;
-      
+    
       print "A new row was created, id is ", $row->id, "\n";
     });
     
     dbic_hooks_register('My::Schema::Result::MySource', 'update', sub {
       my ($row) = @_;
-      
+    
       print "The row with id is ", $row->id, " was updated\n";
     });
 
@@ -119,6 +121,8 @@ L<DBIx::Class::Row|DBIx::Class::Row> object. Note that if all the fields
 are updated to the same values as the current ones, no C<UPDATE> SQL
 command is actually sent to the database server, but the callback will
 be called anyway.
+
+The C<delete> action is called after the row is deleted.
 
 All the callbacks receive a single parameter, the
 L<DBIx::Class::Row|DBIx::Class::Row> object that was created or

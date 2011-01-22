@@ -37,9 +37,9 @@ sub delete {
 
   $ret;
 }
-perlpod
 
-  1;
+
+1;
 
 
 __END__
