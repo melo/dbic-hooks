@@ -93,7 +93,9 @@ operations.
 =end pod::coverage
 
 =head2 insert
+
 =head2 update
+
 =head2 delete
 
 =head1 AUTHOR
