@@ -36,7 +36,7 @@ is(
   undef,
   'Register delete hook ok'
 );
-Pod::Coverage
+
 
 ### Test them
 my $u = $u_rs->create({u => 'Mini Me'});
