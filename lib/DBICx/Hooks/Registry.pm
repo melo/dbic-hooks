@@ -80,10 +80,6 @@ version 0.001
 
 =head1 SYNOPSIS
 
-    package SomeClass;
-    
-    use DBICx::Hooks::Registry;
-    
     dbic_hooks_register('My::Schema::Result::MySource', 'create', sub {
       my ($row) = @_;
       
@@ -113,7 +109,8 @@ The C<dbic_hooks_register> function takes a pair C<Source>/C<Action> and
 a callback. The callback will be called after the specified C<Action> is
 performed on C<Source>.
 
-The following C<Action>'s are supported: C<create> and C<update>.
+The following C<Action>'s are supported: C<create>, C<update> and
+C<delete>.
 
 The C<create> action will be called after a new row is created on C<Source>.
 
