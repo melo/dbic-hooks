@@ -101,7 +101,9 @@ version 0.001
 To register a callback with a specific Source/Action pair, you use this
 registry functions.
 
-=function dbic_hooks_register
+=head1 FUNCTIONS
+
+=head2 dbic_hooks_register
 
     dbic_hooks_register('Source', 'Action', sub { my $row = shift; ... });
     dbic_hooks_register($row_obj, 'Action', sub { my $row = shift; ... });
@@ -125,7 +127,7 @@ All the callbacks receive a single parameter, the
 L<DBIx::Class::Row|DBIx::Class::Row> object that was created or
 modified.
 
-=function dbic_hooks_for
+=head2 dbic_hooks_for
 
     @list_of_cbs = dbic_hooks_for('Source', 'Action');
     @list_of_cbs = dbic_hooks_for($row_obj, 'Action');
