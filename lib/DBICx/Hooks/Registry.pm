@@ -3,7 +3,7 @@ BEGIN {
   $DBICx::Hooks::Registry::VERSION = '0.001';
 }
 
-# ABSTRACT: Provide hooks into DBIx::Class create()/update()
+# ABSTRACT: Manage the DBICx::Hooks registry of callbacks
 
 use strict;
 use warnings;
@@ -72,7 +72,7 @@ use parent 'Exporter';
 
 =head1 NAME
 
-DBICx::Hooks::Registry - Provide hooks into DBIx::Class create()/update()
+DBICx::Hooks::Registry - Manage the DBICx::Hooks registry of callbacks
 
 =head1 VERSION
 
