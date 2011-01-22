@@ -5,6 +5,7 @@ package DBICx::Hooks::Registry;
 use strict;
 use warnings;
 use Carp 'confess';
+use Scalar::Util 'blessed';
 use parent 'Exporter';
 
 @DBICx::Hooks::Registry::EXPORT = qw( dbic_hooks_register dbic_hooks_for );
@@ -52,6 +53,8 @@ in the list.
 
   sub dbic_hooks_register {
     my ($source, $action, $cb) = @_;
+    $source = _source_for($source);
+
     confess("Missing required first parameter 'source', ")
       unless $source;
 
@@ -76,6 +79,7 @@ in the list.
 
   sub dbic_hooks_for {
     my ($source, $action) = @_;
+    $source = _source_for($source);
 
     my $list = [];
     $list = $registry{$source}{$action}
@@ -83,6 +87,13 @@ in the list.
 
     return @$list if wantarray;
     return scalar(@$list);
+  }
+
+  sub _source_for {
+    my $t = $_[0];
+    return $t unless blessed($t);
+    return $t->result_source->result_class if $t->can('result_source');
+    confess("Invalid 'source' argument '$t', ");
   }
 }
 

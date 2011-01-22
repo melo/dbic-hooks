@@ -5,6 +5,7 @@ use warnings;
 use Test::More;
 use Test::Fatal;
 use Test::Deep;
+use Test::MockObject;
 use DBICx::Hooks::Registry;
 
 
@@ -29,6 +30,30 @@ subtest 'good usage' => sub {
     [dbic_hooks_for('Source', 'create')],
     [$cb1, $cb2],
     'Expected callbacks for Source/create',
+  );
+};
+
+
+subtest 'obj for sources' => sub {
+  my $row =
+    Test::MockObject->new->set_always('result_source' =>
+      Test::MockObject->new->set_always('result_class' => 'Row'));
+  my $set =
+    Test::MockObject->new->set_always('result_source' =>
+      Test::MockObject->new->set_always('result_class' => 'Set'));
+
+  dbic_hooks_register($row, 'create', sub { });
+  dbic_hooks_register($set, 'update', sub { });
+
+  cmp_deeply(
+    [dbic_hooks_for('Row', 'create')],
+    [dbic_hooks_for($row,  'create')],
+    'Proper callbacks for Row',
+  );
+  cmp_deeply(
+    [dbic_hooks_for('Set', 'update')],
+    [dbic_hooks_for($set,  'update')],
+    'Proper callbacks for Set',
   );
 };
 
