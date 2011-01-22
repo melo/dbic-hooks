@@ -37,7 +37,7 @@ sub delete {
 
   $ret;
 }
-
+perlpod
 
 1;
 
@@ -85,18 +85,15 @@ delete() calls on your sources.
 This can be used to trigger bussiness processes after one of this
 operations.
 
-=begin pod::coverage
-
-
-
-
-=end pod::coverage
+=begin pod_coverage
 
 =head2 insert
 
 =head2 update
 
 =head2 delete
+
+=end pod_coverage
 
 =head1 AUTHOR
 
