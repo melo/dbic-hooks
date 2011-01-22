@@ -39,7 +39,7 @@ sub delete {
 }
 perlpod
 
-1;
+  1;
 
 
 __END__
@@ -84,6 +84,13 @@ delete() calls on your sources.
 
 This can be used to trigger bussiness processes after one of this
 operations.
+
+You register callbacks (even multiple callbacks) with a pair
+C<Source>/C<Action>. Each callback receives a single parameter, the row
+object just created/updated/just deleted.
+
+See L<DBICx::Hooks::Registry> for extra details on the
+C<dbic_hooks_registry()> function.
 
 =begin pod_coverage
 
