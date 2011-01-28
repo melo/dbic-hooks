@@ -1,6 +1,6 @@
 package DBICx::Hooks::Registry;
 BEGIN {
-  $DBICx::Hooks::Registry::VERSION = '0.001';
+  $DBICx::Hooks::Registry::VERSION = '0.002';
 }
 
 # ABSTRACT: Manage the DBICx::Hooks registry of callbacks
@@ -76,7 +76,7 @@ DBICx::Hooks::Registry - Manage the DBICx::Hooks registry of callbacks
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 

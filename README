@@ -1,7 +1,7 @@
 
 
 This archive contains the distribution DBICx-Hooks,
-version 0.001:
+version 0.002:
 
   Provide hooks into DBIx::Class create()/update()/delete()
 

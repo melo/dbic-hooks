@@ -25,11 +25,12 @@ my %WriteMakefileArgs = (
   'LICENSE' => 'artistic_2',
   'NAME' => 'DBICx::Hooks',
   'PREREQ_PM' => {
+    'DBIx::Class' => '0',
     'Exporter' => '0',
     'Scalar::Util' => '0',
     'parent' => '0'
   },
-  'VERSION' => '0.001',
+  'VERSION' => '0.002',
   'test' => {
     'TESTS' => 't/*.t'
   }
