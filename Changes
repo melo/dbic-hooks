@@ -1,6 +1,7 @@
 Revision history for DBICx-Hooks
  
 {{$NEXT}}
+  * More dependencies fixes, no new features or bugfixes
 
 0.002     2011-01-28 08:04:33 Europe/Lisbon
   * Fix dependencies, make DBIx::Class a requirement
