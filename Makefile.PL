@@ -27,10 +27,11 @@ my %WriteMakefileArgs = (
   'PREREQ_PM' => {
     'DBIx::Class' => '0',
     'Exporter' => '0',
+    'SQL::Translator' => '0.11006',
     'Scalar::Util' => '0',
     'parent' => '0'
   },
-  'VERSION' => '0.002',
+  'VERSION' => '0.003',
   'test' => {
     'TESTS' => 't/*.t'
   }

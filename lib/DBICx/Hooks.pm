@@ -1,6 +1,6 @@
 package DBICx::Hooks;
 BEGIN {
-  $DBICx::Hooks::VERSION = '0.002';
+  $DBICx::Hooks::VERSION = '0.003';
 }
 
 # ABSTRACT: Provide hooks into DBIx::Class create()/update()/delete()
@@ -51,7 +51,7 @@ DBICx::Hooks - Provide hooks into DBIx::Class create()/update()/delete()
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
